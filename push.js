@@ -16,7 +16,7 @@ websocket.on("request", (request) => {
 
   connection.on("message", (message) => {
     connections.forEach((c) => {
-      c.send(`User ${connection.socket.remotePort} says : ${message}`);
+      c.send(`User ${connection.socket.remotePort} says : ${message.utf8Data}`);
     });
   });
 
