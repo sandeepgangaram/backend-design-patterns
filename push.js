@@ -5,7 +5,7 @@ let connections = [];
 
 const httpServer = http.createServer();
 
-const websocket = new WebSocketServer({ httpServer: httpServer });
+const websocket = new WebSocketServer({ httpServer });
 
 httpServer.listen(8080, () => {
   console.log("Listening on port 8080");
