@@ -16,13 +16,16 @@ websocket.on("request", (request) => {
 
   connection.on("message", (message) => {
     connections.forEach((c) => {
-      c.send(`User ${connection.socket.remotePort} says : ${message.utf8Data}`);
+      c.connected &&
+        c.send(
+          `User ${connection.socket.remotePort} says : ${message.utf8Data}`
+        );
     });
   });
 
   connections.push(connection);
 
   connections.forEach((c) => {
-    c.send(`User ${connection.socket.remotePort} just joined.`);
+    c.connected && c.send(`User ${connection.socket.remotePort} just joined.`);
   });
 });
