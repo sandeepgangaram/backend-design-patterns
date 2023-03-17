@@ -26,3 +26,7 @@ function sendStream(res) {
 }
 
 app.listen(8080);
+
+//Client-side code
+// const sse = new EventSource('http://localhost:8080/stream');
+// sse.onmessage = console.log
