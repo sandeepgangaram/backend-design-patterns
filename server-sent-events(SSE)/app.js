@@ -1,1 +1,28 @@
 const express = require("express");
+
+const app = express();
+
+app.get("/", (req, res) => {
+  res.end("Hello");
+});
+
+app.get("/stream", (req, res) => {
+  res.setHeader("Content-Type", "text/event-stream");
+  sendStream(res);
+});
+
+let i = 0;
+
+function sendStream(res) {
+  if (i > 10) {
+    res.end("Data Streaming Complete");
+    return;
+  }
+
+  res.write("data: " + `hello from server --- ${i++}` + "\n\n");
+  setTimeout(() => {
+    sendStream(res);
+  }, 1000);
+}
+
+app.listen(8080);
