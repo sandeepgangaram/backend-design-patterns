@@ -7,7 +7,7 @@ const jobs = {};
 app.post("/task", (req, res) => {
   const jobId = `${Date.now()}`;
   jobs[jobId] = 0;
-  updateJob(jobId);
+  updateJob(jobId, 0);
   res.end("\n\n" + jobId + "\n\n");
 });
 
@@ -17,3 +17,25 @@ app.get("/checkstatus", async (req, res) => {
   while ((await checkJobComplete(id)) == false);
   res.end(`${id} Job Status Complete : ${jobs[id]}`);
 });
+
+function checkJobComplete(id) {
+  return new Promise((res, rej) => {
+    if (jobs[id] < 100) {
+      setTimeout(() => {
+        res(false);
+      }, 1000);
+    } else {
+      res(true);
+    }
+  });
+}
+
+function updateJob(id, prog) {
+  jobs[id] = prog;
+
+  if (jobs[id] === 100) return;
+
+  setTimeout(() => {
+    updateJob(id, prog + 10);
+  }, 3000);
+}
