@@ -15,7 +15,11 @@ app.get("/checkstatus", async (req, res) => {
   const { id } = req.query;
 
   while ((await checkJobComplete(id)) == false);
-  res.end(`${id} Job Status Complete : ${jobs[id]}`);
+  res.end(`${id} Job Status Complete : ${jobs[id]}%`);
+});
+
+app.listen(8080, () => {
+  console.log("Listening on port 8080");
 });
 
 function checkJobComplete(id) {
@@ -34,7 +38,7 @@ function updateJob(id, prog) {
   jobs[id] = prog;
 
   if (jobs[id] === 100) return;
-
+  console.log(`${id} Progress is ${jobs[id]}%`);
   setTimeout(() => {
     updateJob(id, prog + 10);
   }, 3000);
