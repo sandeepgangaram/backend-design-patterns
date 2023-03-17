@@ -14,15 +14,14 @@ app.get("/stream", (req, res) => {
 let i = 0;
 
 function sendStream(res) {
-  if (i > 10) {
+  if (i <= 10) {
+    res.write("data: " + `hello from server --- ${i++}` + "\n\n");
+    setTimeout(() => {
+      sendStream(res);
+    }, 1000);
+  } else {
     res.end("Data Streaming Complete");
-    return;
   }
-
-  res.write("data: " + `hello from server --- ${i++}` + "\n\n");
-  setTimeout(() => {
-    sendStream(res);
-  }, 1000);
 }
 
 app.listen(8080);
