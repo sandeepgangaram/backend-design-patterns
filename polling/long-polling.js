@@ -36,9 +36,8 @@ function checkJobComplete(id) {
 
 function updateJob(id, prog) {
   jobs[id] = prog;
-
-  if (jobs[id] === 100) return;
   console.log(`${id} Progress is ${jobs[id]}%`);
+  if (jobs[id] === 100) return;
   setTimeout(() => {
     updateJob(id, prog + 10);
   }, 3000);
