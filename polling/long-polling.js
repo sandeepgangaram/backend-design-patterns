@@ -8,7 +8,7 @@ app.post("/task", (req, res) => {
   const jobId = `${Date.now()}`;
   jobs[jobId] = 0;
   updateJob(jobId, 0);
-  res.end("\n\n" + jobId + "\n\n");
+  res.end("\n\n" + `JobID : ${jobId}` + "\n\n");
 });
 
 app.get("/checkstatus", async (req, res) => {
