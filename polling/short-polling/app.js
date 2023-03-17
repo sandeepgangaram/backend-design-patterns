@@ -14,7 +14,7 @@ app.post("/task", (req, res) => {
 app.get("/checkstatus", (req, res) => {
   const { id } = req.query;
   const status = jobs[id];
-  res.end(`Status of ${id} is ${status}`);
+  res.end("\n\n" + `Status of ${id} is ${status}` + "\n\n");
 });
 
 app.listen(8080, () => {
@@ -23,6 +23,7 @@ app.listen(8080, () => {
 
 function updateJob(id, progress) {
   jobs[id] = progress;
+  console.log(`${id} progess is ${progress}`);
   if (jobs[id] === 100) return;
   setTimeout(() => {
     updateJob(id, progress + 10);
