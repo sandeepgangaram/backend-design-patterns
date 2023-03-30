@@ -42,3 +42,12 @@ function updateJob(id, prog) {
     updateJob(id, prog + 10);
   }, 3000);
 }
+
+//Client Code
+
+// fetch("http://localhost:8080/task", { method: "POST" })
+//   .then((res) => res.json())
+//   .then((res) => console.log(res));
+// fetch("http://localhost:8080/checkstatus?id=")
+//   .then((res) => res.json())
+//   .then((res) => console.log(res));
